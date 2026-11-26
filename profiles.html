@@ -50,11 +50,9 @@
 											<a href="#avb_lite" class="profile-tab" data-file="avb_lite.md">AVB Lite</a>
 											<a href="#avb_wireless" class="profile-tab" data-file="avb_wireless.md">AVB Wireless</a>
 											<a href="#voice_assistant" class="profile-tab" data-file="voice_assistant.md">Voice Assistant</a>
+											<a href="#robotics" class="profile-tab" data-group="robotics">Robotics</a>
 										</nav>
-										<nav id="profile-levels">
-											<a href="#audio_basic" class="profile-level active" data-level="basic">Basic</a>
-											<a href="#audio_extended" class="profile-level" data-level="extended">Extended</a>
-										</nav>
+										<nav id="profile-levels"></nav>
 									</header>
 
 									<section id="profile-content">
@@ -120,38 +118,68 @@
 					});
 				}
 
-				// Audio and Video each have a basic and an extended profile; the
-				// level toggle keeps its choice when switching between them.
-				var level = 'basic';
+				// Tabs with sub-tabs: [key, label, file] each, the first the default.
+				var groups = {
+					audio: [['basic', 'Basic', 'audio_basic.md'], ['extended', 'Extended', 'audio_extended.md']],
+					video: [['basic', 'Basic', 'video_basic.md'], ['extended', 'Extended', 'video_extended.md']],
+					robotics: [['main', 'Main', 'robotics.md'], ['tscf', 'TSCF Streams', 'robotics_tscf.md']]
+				};
 
-				// The profile named by the URL hash (e.g. #avb_lite,
-				// #audio_extended, or #video for the current level), or null.
+				// The sub-tab last chosen. Audio and Video share theirs, so
+				// switching between them keeps Basic or Extended.
+				var lastKey = 'basic';
+
+				// A group's profile for the sub-tab last chosen, else its first.
+				function groupFile(group) {
+					var match = groups[group].filter(function(entry) { return entry[0] === lastKey; })[0];
+					return (match || groups[group][0])[2];
+				}
+
+				// The group and sub-tab a profile belongs to, or null.
+				function groupOf(file) {
+					for (var group in groups) {
+						var entry = groups[group].filter(function(entry) { return entry[2] === file; })[0];
+						if (entry) return { group: group, key: entry[0] };
+					}
+					return null;
+				}
+
+				function hashFor(file) {
+					return '#' + file.replace(/\.md$/, '');
+				}
+
+				// The profile named by the URL hash (e.g. #avb_lite, #audio_extended,
+				// #robotics_tscf, or #video for its current sub-tab), or null.
 				function fileFromHash() {
 					var name = decodeURIComponent(location.hash.slice(1)).toLowerCase().replace(/-/g, '_');
-					if (name === 'audio' || name === 'video') name += '_' + level;
-					if (/^(audio|video)_(basic|extended)$/.test(name)) return name + '.md';
+					var file = name + '.md';
+					if (groupOf(file)) return file;
+					if (Object.prototype.hasOwnProperty.call(groups, name)) return groupFile(name);
 					var found = null;
 					document.querySelectorAll('.profile-tab[data-file]').forEach(function(tab) {
-						if (tab.getAttribute('data-file') === name + '.md') found = name + '.md';
+						if (tab.getAttribute('data-file') === file) found = file;
 					});
 					return found;
 				}
 
 				function selectProfile(file) {
-					var match = file.match(/^(audio|video)_(basic|extended)\.md$/);
-					var group = match ? match[1] : null;
-					if (match) level = match[2];
+					var place = groupOf(file);
+					if (place) lastKey = place.key;
 					document.querySelectorAll('.profile-tab').forEach(function(tab) {
 						var tabGroup = tab.getAttribute('data-group');
-						if (tabGroup) tab.setAttribute('href', '#' + tabGroup + '_' + level);
-						tab.classList.toggle('active', tabGroup ? tabGroup === group : tab.getAttribute('data-file') === file);
+						var current = place && tabGroup === place.group;
+						if (tabGroup) tab.setAttribute('href', hashFor(current ? file : groupFile(tabGroup)));
+						tab.classList.toggle('active', tabGroup ? !!current : tab.getAttribute('data-file') === file);
 					});
-					var levels = document.getElementById('profile-levels');
-					levels.hidden = !group;
-					levels.querySelectorAll('.profile-level').forEach(function(link) {
-						var linkLevel = link.getAttribute('data-level');
-						if (group) link.setAttribute('href', '#' + group + '_' + linkLevel);
-						link.classList.toggle('active', linkLevel === level);
+					var subtabs = document.getElementById('profile-levels');
+					subtabs.hidden = !place;
+					subtabs.innerHTML = '';
+					if (place) groups[place.group].forEach(function(entry) {
+						var link = document.createElement('a');
+						link.className = 'profile-level' + (entry[2] === file ? ' active' : '');
+						link.href = hashFor(entry[2]);
+						link.textContent = entry[1];
+						subtabs.appendChild(link);
 					});
 					loadProfile(file);
 				}
