@@ -2037,6 +2037,17 @@ input, select, textarea {
 				color: #7AA2F7;
 			}
 
+			/* The tsLAN clock in place of a glyph, in the glyphs' size and colours. */
+			#nav > ul > li > a.icon-tslan:before {
+				content: '\00a0';
+				background: #414868 url("../../images/nav-tslan.svg") center / 1em 1em no-repeat;
+			}
+
+			#nav > ul > li.active > a.icon-tslan:before,
+			#nav > ul > li:hover > a.icon-tslan:before {
+				background: #7AA2F7 url("../../images/nav-tslan-hover.svg") center / 1em 1em no-repeat;
+			}
+
 	.dropotron {
 		text-align: left;
 		border: solid 1px #292e42;
