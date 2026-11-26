@@ -1,6 +1,5 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Arvo:700");
-@import url("https://fonts.googleapis.com/css2?family=Silkscreen&display=block");
 
 /*
 	Strongly Typed by HTML5 UP
@@ -118,7 +117,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Silkscreen', monospace;
+		font-family: 'Source Sans Pro', sans-serif;
 		font-weight: 600;
 		text-transform: uppercase;
 		color: #a9b1d6;
@@ -1788,7 +1787,7 @@ input, select, textarea {
 		border-radius: 4px;
 		border: 0;
 		outline: 0;
-		font-family: 'Silkscreen', monospace;
+		font-family: 'Source Sans Pro', sans-serif;
 		font-size: 1em;
 		box-shadow: 0.125em 0.175em 0 0 rgba(0, 0, 0, 0.125);
 		font-weight: 600;
@@ -1929,7 +1928,7 @@ input, select, textarea {
 		}
 
 		#header h1 {
-			font-family: 'Silkscreen', monospace;
+			font-family: 'Source Sans Pro', sans-serif;
 			font-weight: 700;
 			color: #7aa2f7;
 			text-shadow: 0.05em 0.075em 0 rgba(0, 0, 0, 0.1);
@@ -1949,7 +1948,7 @@ input, select, textarea {
 			}
 
 		#header p {
-			font-family: 'Silkscreen', monospace;
+			font-family: 'Source Sans Pro', sans-serif;
 			text-transform: uppercase;
 			font-weight: 400;
 			color: #a9b1d6;
@@ -1979,7 +1978,7 @@ input, select, textarea {
 			}
 
 			#nav > ul > li > a {
-				font-family: 'Silkscreen', monospace;
+				font-family: 'Source Sans Pro', sans-serif;
 				border: 0;
 				text-decoration: none;
 				text-transform: uppercase;
@@ -2244,8 +2243,9 @@ input, select, textarea {
 	}
 
 	.profile-tab {
-		font-family: 'Silkscreen', monospace;
+		font-family: 'Source Sans Pro', sans-serif;
 		font-size: 0.65em;
+		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 2px;
 		padding: 0.5em 1em;
@@ -2529,7 +2529,7 @@ input, select, textarea {
 				z-index: 10002;
 				background: #13141c;
 				border-right: solid 1px #292e42;
-				font-family: 'Silkscreen', monospace;
+				font-family: 'Source Sans Pro', sans-serif;
 				font-weight: 400;
 				text-transform: uppercase;
 				color: #a9b1d6;
