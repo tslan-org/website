@@ -1,2 +1,2 @@
-# AVB Community Website
-This repository contains the source code for the AVB Community website.
+# tsLAN Website
+This repository contains the source code for the tsLAN website.
