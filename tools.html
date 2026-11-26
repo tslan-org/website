@@ -27,7 +27,7 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-									<li><a class="icon solid fa-microchip" href="index.html"><span>tsLAN</span></a></li>
+									<li><a class="icon solid fa-microchip" href="index.html"><span class="brand">tsLAN</span></a></li>
 									<li><a class="icon solid fa-clipboard-list" href="profiles.html"><span>Profiles</span></a></li>
 									<li><a class="icon solid fa-terminal" href="tools.html"><span>CLI Tools</span></a></li>
 								</ul>
@@ -81,6 +81,7 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/brand.js"></script>
 			<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 			<script>
 				var readmeUrl = 'https://raw.githubusercontent.com/tslan-org/tools/refs/heads/main/README.md';
@@ -102,6 +103,7 @@
 						.then(function(markdown) {
 							var body = document.getElementById('profile-content-body');
 							body.innerHTML = marked.parse(markdown);
+							markBrand(body);
 							body.querySelectorAll('h1, h2, h3, h4').forEach(function(h) {
 								if (!h.id) h.id = slugify(h.textContent);
 							});

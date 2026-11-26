@@ -129,6 +129,11 @@ input, select, textarea {
 		border: 0;
 	}
 
+	/* "tsLAN" keeps its lowercase "ts" in uppercased text. */
+	.brand {
+		text-transform: none;
+	}
+
 	h2 {
 		font-size: 1.65em;
 		font-weight: 400;
@@ -2262,6 +2267,47 @@ input, select, textarea {
 		}
 
 		.profile-tab.active {
+			color: #7aa2f7 !important;
+			background: #1f2335;
+			border-color: #7aa2f7;
+		}
+
+	/* Basic | Extended toggle under Audio and Video */
+	#profile-levels {
+		display: flex;
+		justify-content: center;
+		margin-top: 0.75em;
+	}
+
+		#profile-levels[hidden] {
+			display: none;
+		}
+
+	.profile-level {
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 0.6em;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		padding: 0.35em 1.25em;
+		border: solid 1px #292e42;
+		color: #565f89 !important;
+		text-decoration: none;
+		background: transparent;
+		transition: color 0.2s, background 0.2s;
+	}
+
+		.profile-level + .profile-level {
+			margin-left: -1px;
+		}
+
+		.profile-level:hover {
+			color: #c0caf5 !important;
+			background: #1f2335;
+		}
+
+		.profile-level.active {
+			position: relative;
 			color: #7aa2f7 !important;
 			background: #1f2335;
 			border-color: #7aa2f7;
